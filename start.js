@@ -5,10 +5,15 @@ module.exports = {
       method: "shell.run",
       params: {
         venv: "env",                // Edit this to customize the venv folder path
-        env: { },                   // Edit this to customize environment variables (see documentation)
+        env: {
+          PYTHONPATH: "{{path.resolve(cwd, 'app')}}",
+          PYTORCH_ENABLE_MPS_FALLBACK: "1"
+        },                   // Edit this to customize environment variables (see documentation)
         path: "app",                // Edit this to customize the path to start the shell from
         message: [
-          "python app.py",    // Edit with your custom commands
+        //  "python -m streamlit run DiffSynth_Studio.py"
+          "echo $PYTHONPATH",
+          "python examples/ExVideo/ExVideo_svd_test.py"
         ],
         on: [{
           // The regular expression pattern to monitor.
